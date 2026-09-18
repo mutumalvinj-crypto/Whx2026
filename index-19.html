@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WHX 2026 — Solutions for healthcare companies in Kenya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF8;
+    --surface:#FFFFFF;
+    --ink:#14181D;
+    --muted:#5A6472;
+    --line:#E4E5E1;
+    --accent:#14614F;
+    --accent-soft:#E8F0ED;
+    --shadow:0 1px 2px rgba(20,24,29,.05);
+    --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0F1214;
+      --surface:#171B1E;
+      --ink:#ECEEEC;
+      --muted:#9AA3A9;
+      --line:#2A2F33;
+      --accent:#57C4A8;
+      --accent-soft:#17302A;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0F1214;
+    --surface:#171B1E;
+    --ink:#ECEEEC;
+    --muted:#9AA3A9;
+    --line:#2A2F33;
+    --accent:#57C4A8;
+    --accent-soft:#17302A;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{max-width:100%}
+  a{color:inherit}
+  button{font:inherit;color:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important}
+  }
+
+  .wrap{max-width:620px;margin:0 auto;padding:0 22px}
+
+  /* ---------- masthead ---------- */
+  .mast{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:22px 0 0;
+  }
+  .name{font-weight:600;letter-spacing:-.01em}
+  .place{
+    font-size:13.5px;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:5px 12px;
+    background:var(--surface);white-space:nowrap;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:44px 0 10px}
+  .tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13.5px;color:var(--accent);font-weight:500;
+    background:var(--accent-soft);border-radius:999px;padding:6px 12px;margin-bottom:22px;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+  h1{
+    font-size:clamp(34px,8.6vw,46px);
+    line-height:1.04;letter-spacing:-.032em;font-weight:600;
+    margin:0 0 20px;
+  }
+  .lede{font-size:18px;color:var(--muted);margin:0 0 26px;max-width:32em}
+  .lede strong{color:var(--ink);font-weight:500}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+    padding:15px 24px;border-radius:10px;font-weight:600;font-size:16px;
+    text-decoration:none;
+  }
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn-note{font-size:13.5px;color:var(--muted);margin-top:12px}
+
+  /* ---------- sections ---------- */
+  section{padding:46px 0}
+  .sec-head{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+  h2{font-size:24px;letter-spacing:-.02em;font-weight:600;margin:0 0 8px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:18px 18px;margin-bottom:12px;box-shadow:var(--shadow);
+  }
+  .card h3{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--muted);font-size:15.5px}
+
+  .steps{border-left:2px solid var(--line);padding-left:20px;margin:0}
+  .steps li{list-style:none;margin-bottom:24px;position:relative}
+  .steps li:last-child{margin-bottom:0}
+  .steps li::before{
+    content:attr(data-n);position:absolute;left:-31px;top:2px;
+    width:20px;height:20px;border-radius:50%;background:var(--paper);
+    border:2px solid var(--line);color:var(--muted);
+    font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;
+  }
+  .steps h3{margin:0 0 4px;font-size:17px;font-weight:600}
+  .steps p{margin:0;color:var(--muted);font-size:15.5px}
+
+  /* ---------- fees ---------- */
+  .fee{
+    display:flex;gap:14px;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding:16px 0;
+  }
+  .fee:last-of-type{border-bottom:0}
+  .fee-l{flex:1}
+  .fee-l h3{margin:0 0 4px;font-size:17px;font-weight:600}
+  .fee-l p{margin:0;color:var(--muted);font-size:15px}
+  .fee-r{text-align:right;white-space:nowrap}
+  .price{font-weight:600;font-size:16px}
+  .price small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+  .terms{
+    background:var(--accent-soft);border-radius:var(--radius);
+    padding:16px 18px;margin-top:20px;font-size:15px;color:var(--ink)
+  }
+  .terms p{margin:0 0 8px}
+  .terms p:last-child{margin:0}
+
+  /* ---------- closing ---------- */
+  .closer{
+    background:var(--ink);color:var(--paper);border-radius:16px;padding:28px 22px;margin:10px 0 0;
+  }
+  .closer h2{color:var(--paper);margin-bottom:10px}
+  .closer p{color:rgba(250,250,248,.72);margin:0 0 20px;font-size:16px}
+  .closer .btn{background:var(--paper);color:var(--ink);border-color:var(--paper);width:100%}
+  .sig{margin-top:22px;font-size:15px}
+  .sig b{display:block;font-weight:600;color:var(--paper)}
+  .sig span{color:rgba(250,250,248,.6)}
+  footer{padding:26px 0 46px;color:var(--muted);font-size:13.5px}
+
+  /* ---------- intake overlay ---------- */
+  .sheet{
+    position:fixed;inset:0;background:var(--paper);z-index:50;
+    display:none;flex-direction:column;
+  }
+  .sheet.open{display:flex}
+  .sheet-top{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 16px;border-bottom:1px solid var(--line);
+    background:var(--surface);
+  }
+  .icon-btn{
+    background:transparent;border:1px solid var(--line);border-radius:9px;
+    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+    flex:0 0 auto;
+  }
+  .icon-btn svg{width:18px;height:18px}
+  .sheet-title{flex:1;font-size:14px;color:var(--muted);text-align:center}
+  .sheet-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:26px 0 40px}
+  .sheet-foot{
+    padding:12px 16px calc(14px + env(safe-area-inset-bottom));
+    border-top:1px solid var(--line);background:var(--surface);
+    display:flex;gap:10px;
+  }
+  .sheet-foot .btn{flex:1}
+  .sheet-foot .btn.back{flex:0 0 96px}
+
+  .bar{height:3px;background:var(--line);width:100%}
+  .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s ease}
+
+  .q{font-size:24px;letter-spacing:-.02em;font-weight:600;margin:0 0 8px;line-height:1.2}
+  .hint{color:var(--muted);font-size:15.5px;margin:0 0 22px}
+
+  label.f{display:block;margin-bottom:16px}
+  label.f span{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+  input[type=text],input[type=email],input[type=tel],textarea,select{
+    width:100%;background:var(--surface);color:var(--ink);
+    border:1px solid var(--line);border-radius:10px;
+    padding:13px 14px;font:inherit;font-size:16px;
+  }
+  textarea{min-height:116px;resize:vertical;line-height:1.5}
+  input::placeholder,textarea::placeholder{color:#9AA3A9}
+
+  .opt{
+    display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
+    background:var(--surface);border:1px solid var(--line);border-radius:11px;
+    padding:14px;margin-bottom:10px;
+  }
+  .opt.on{border-color:var(--accent);background:var(--accent-soft)}
+  .opt .tick{
+    flex:0 0 20px;height:20px;margin-top:2px;border-radius:50%;
+    border:2px solid var(--line);display:flex;align-items:center;justify-content:center;
+  }
+  .opt.on .tick{border-color:var(--accent);background:var(--accent)}
+  .opt.on .tick::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+  .opt b{display:block;font-weight:600;font-size:16px}
+  .opt em{display:block;font-style:normal;color:var(--muted);font-size:14.5px;margin-top:3px}
+  .opt .amt{display:block;margin-top:8px;font-weight:600;font-size:15px;color:var(--accent)}
+
+  .days{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:18px;-webkit-overflow-scrolling:touch}
+  .day{
+    flex:0 0 auto;background:var(--surface);border:1px solid var(--line);
+    border-radius:11px;padding:10px 12px;text-align:center;min-width:64px;
+  }
+  .day.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+  .day u{display:block;text-decoration:none;font-size:12px;color:var(--muted)}
+  .day.on u{color:var(--accent)}
+  .day b{display:block;font-size:18px;font-weight:600}
+
+  .ack{
+    display:flex;gap:12px;align-items:flex-start;background:var(--surface);
+    border:1px solid var(--line);border-radius:11px;padding:14px;margin-top:6px;width:100%;text-align:left;
+  }
+  .ack.on{border-color:var(--accent)}
+  .ack .box{
+    flex:0 0 20px;height:20px;border-radius:5px;border:2px solid var(--line);
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .ack.on .box{background:var(--accent);border-color:var(--accent)}
+  .ack.on .box::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+  .ack p{margin:0;font-size:15px}
+
+  .err{color:#B3261E;font-size:14.5px;margin:-6px 0 14px}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .err{color:#F2B8B5}}
+
+  .review dl{margin:0;border-top:1px solid var(--line)}
+  .review dt{font-size:13px;color:var(--muted);padding-top:14px}
+  .review dd{margin:2px 0 14px;font-size:16px;border-bottom:1px solid var(--line);padding-bottom:14px;white-space:pre-wrap}
+  .sent{
+    background:var(--accent-soft);border-radius:var(--radius);padding:18px;margin-bottom:18px;
+  }
+  .sent p{margin:0;font-size:15.5px}
+  .stack{display:flex;flex-direction:column;gap:10px}
+  .stack .btn{width:100%}
+  .toast{
+    position:fixed;left:50%;bottom:92px;transform:translateX(-50%);
+    background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;
+    font-size:14px;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s
+  }
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="page">
+
+  <div class="mast">
+    <div class="name">Alvin Mutuma Koome</div>
+    <div class="place">Nairobi, Kenya</div>
+  </div>
+
+  <div class="hero">
+    <div class="tag"><span class="dot"></span> WHX Nairobi 2026</div>
+    <h1>Finding solutions for healthcare companies in Kenya.</h1>
+    <p class="lede">You have a product that works. What is missing is the <strong>technology, the sales motion, the distribution and the operations</strong> that make it move in this market. I build a small, working version of the answer, run it, and show you the number at the end.</p>
+    <button class="btn" id="open1">Tell me what you need</button>
+    <p class="btn-note">Six short questions. Fees are stated below, before we speak.</p>
+  </div>
+
+  <section>
+    <p class="sec-head">Where I usually come in</p>
+    <div class="card">
+      <h3>Getting into the Kenyan market</h3>
+      <p>Who actually buys, who to partner with, who to meet, and a first commercial test that tells you whether this is real.</p>
+    </div>
+    <div class="card">
+      <h3>Distribution that moves</h3>
+      <p>Finding distributors, building the pipeline, and giving you visibility over stock, orders and follow-up instead of guesswork.</p>
+    </div>
+    <div class="card">
+      <h3>A sales process you can see</h3>
+      <p>Spreadsheets, calls and WhatsApp threads turned into one pipeline where every lead has an owner and a next step.</p>
+    </div>
+    <div class="card">
+      <h3>Operations, data and AI</h3>
+      <p>Working tools for orders, inventory, service workflows and reporting — plus automation where it genuinely saves hours.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-head">How the work runs</p>
+    <ul class="steps">
+      <li data-n="1">
+        <h3>Scope</h3>
+        <p>We agree on one problem, one measure of success and a date. Written down, so nothing is assumed.</p>
+      </li>
+      <li data-n="2">
+        <h3>Pilot</h3>
+        <p>I build the smallest thing that answers the question, and put it in front of real users.</p>
+      </li>
+      <li data-n="3">
+        <h3>Measure</h3>
+        <p>We look at what changed, what did not, and whether a larger engagement is worth your money.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="sec-head">What it costs</p>
+    <h2>Fees, stated up front</h2>
+    <p class="lede" style="font-size:16px;margin-bottom:8px">Pick the option you want to start with when you fill in the brief. Fixed fees, no hourly billing, no surprise invoice.</p>
+
+    <div class="fee">
+      <div class="fee-l">
+        <h3>Introduction call</h3>
+        <p>30 minutes. You describe the problem, I tell you honestly whether it is something I can test.</p>
+      </div>
+      <div class="fee-r"><span class="price">Free<small>no commitment</small></span></div>
+    </div>
+
+    <div class="fee">
+      <div class="fee-l">
+        <h3>Scope note</h3>
+        <p>One week. A written plan: the problem stated properly, what gets built, what we measure, what it costs. Yours to keep either way.</p>
+      </div>
+      <div class="fee-r"><span class="price">KES 60,000<small>≈ USD 470</small></span></div>
+    </div>
+
+    <div class="fee">
+      <div class="fee-l">
+        <h3>Pilot</h3>
+        <p>Four to six weeks. Something working, used by real people, with a result at the end. The scope note fee is credited in full.</p>
+      </div>
+      <div class="fee-r"><span class="price">from KES 250,000<small>≈ USD 1,950</small></span></div>
+    </div>
+
+    <div class="fee">
+      <div class="fee-l">
+        <h3>Continued work</h3>
+        <p>Monthly. Ongoing build and commercial support once a pilot proves itself. Either side can stop with 30 days' notice.</p>
+      </div>
+      <div class="fee-r"><span class="price">KES 180,000 / mo<small>≈ USD 1,400</small></span></div>
+    </div>
+
+    <div class="terms">
+      <p>Half the fee starts the work, half on delivery. Invoiced in Kenyan shillings or US dollars.</p>
+      <p>Travel and any third-party costs are quoted and approved before they are spent.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:12px">
+    <div class="closer">
+      <h2>Have a problem worth testing?</h2>
+      <p>Tell me what you are trying to achieve in Kenya, what is getting in the way, and how the process works today. Pick a time and the option you want to start with. I come back with a focused pilot idea.</p>
+      <button class="btn" id="open2">Start your brief</button>
+      <div class="sig">
+        <b>Alvin Mutuma Koome</b>
+        <span>Commercial &amp; digital pilots · Nairobi</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>Built for conversations at WHX Nairobi. No clinical advice or medical claims.</footer>
+</div>
+
+<!-- ============ intake ============ -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Project brief">
+  <div class="sheet-top">
+    <button class="icon-btn" id="back" aria-label="Go back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+    </button>
+    <div class="sheet-title" id="stepLabel">Step 1 of 6</div>
+    <button class="icon-btn" id="close" aria-label="Close and return to the page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="sheet-body"><div class="wrap" id="stage"></div></div>
+  <div class="sheet-foot">
+    <button class="btn ghost back" id="backFoot">Back</button>
+    <button class="btn accent" id="next">Continue</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var WA = "254759610468";
+  var KEY = "whx2026-brief-v1";
+
+  var d = {
+    name:"", company:"", role:"", contact:"", country:"",
+    areas:[], goal:"", today:"", stage:"", timing:"",
+    pack:"", ack:false, day:"", band:"", notes:""
+  };
+
+  try{ var s = localStorage.getItem(KEY); if(s){ d = Object.assign(d, JSON.parse(s)); } }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+
+  var AREAS = [
+    ["entry","Getting into the Kenyan market","Buyers, partners, first commercial test"],
+    ["dist","Distribution","Distributors, pipeline, follow-up, visibility"],
+    ["sales","Sales process","One pipeline instead of scattered threads"],
+    ["ops","Operations and data","Orders, inventory, service, reporting"],
+    ["ai","AI and automation","Cutting manual work out of a process"],
+    ["unsure","Not sure yet","The problem is clear, the shape of the fix is not"]
+  ];
+  var STAGES = [
+    ["explore","We are still exploring Kenya",""],
+    ["buyers","We have interest but no way to deliver",""],
+    ["partner","We have a distributor and it is not performing",""],
+    ["running","We are already selling and want it to scale",""]
+  ];
+  var TIMING = [["now","Ready to start this month",""],["quarter","Next quarter",""],["later","Gathering information for now",""]];
+  var PACKS = [
+    ["call","Introduction call","30 minutes. You describe the problem, I say whether I can test it.","Free"],
+    ["scope","Scope note","One week. A written plan you keep either way. Credited in full against a pilot.","KES 60,000 · ≈ USD 470"],
+    ["pilot","Pilot","Four to six weeks. Something working, used by real people, measured.","from KES 250,000 · ≈ USD 1,950"],
+    ["ongoing","Continued work","Monthly build and commercial support. 30 days' notice either side.","KES 180,000 / month · ≈ USD 1,400"]
+  ];
+  var BANDS = [
+    ["am","Morning","9:00 – 11:00 EAT"],
+    ["mid","Midday","11:30 – 13:30 EAT"],
+    ["pm","Afternoon","15:00 – 17:00 EAT"]
+  ];
+
+  var sheet=document.getElementById("sheet"),
+      stage=document.getElementById("stage"),
+      bar=document.getElementById("bar"),
+      lab=document.getElementById("stepLabel"),
+      nextBtn=document.getElementById("next"),
+      backFoot=document.getElementById("backFoot"),
+      toastEl=document.getElementById("toast");
+
+  var step = 1, TOTAL = 6, err = "";
+
+  function toast(t){ toastEl.textContent=t; toastEl.classList.add("show"); setTimeout(function(){toastEl.classList.remove("show");},1800); }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function days(){
+    var out=[], dt=new Date(), n=0;
+    while(out.length<12){
+      dt.setDate(dt.getDate()+1); n++;
+      var w=dt.getDay();
+      if(w!==0 && w!==6){
+        out.push({
+          key: dt.toISOString().slice(0,10),
+          dow: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][w],
+          dd: dt.getDate(),
+          mon: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][dt.getMonth()]
+        });
+      }
+      if(n>40) break;
+    }
+    return out;
+  }
+  function dayLabel(k){
+    var f=days().filter(function(x){return x.key===k;})[0];
+    return f ? f.dow+" "+f.dd+" "+f.mon : "";
+  }
+  function packLabel(k){ var p=PACKS.filter(function(x){return x[0]===k;})[0]; return p? p[1]+" — "+p[3] : ""; }
+  function bandLabel(k){ var b=BANDS.filter(function(x){return x[0]===k;})[0]; return b? b[1]+" ("+b[2]+")" : ""; }
+  function areaLabels(){ return d.areas.map(function(a){ var f=AREAS.filter(function(x){return x[0]===a;})[0]; return f?f[1]:a; }).join(", "); }
+  function stageLabel(){ var f=STAGES.filter(function(x){return x[0]===d.stage;})[0]; return f?f[1]:""; }
+  function timingLabel(){ var f=TIMING.filter(function(x){return x[0]===d.timing;})[0]; return f?f[1]:""; }
+
+  function optList(list, sel, multi){
+    return list.map(function(o){
+      var on = multi ? sel.indexOf(o[0])>-1 : sel===o[0];
+      return '<button class="opt'+(on?" on":"")+'" data-pick="'+o[0]+'">'+
+        '<span class="tick"></span><span><b>'+esc(o[1])+'</b>'+
+        (o[2]?'<em>'+esc(o[2])+'</em>':'')+
+        (o[3]?'<span class="amt">'+esc(o[3])+'</span>':'')+
+        '</span></button>';
+    }).join("");
+  }
+
+  function brief(){
+    var L=[];
+    L.push("WHX 2026 — project brief");
+    L.push("");
+    L.push("From: "+d.name+(d.role?", "+d.role:"")+(d.company?" — "+d.company:""));
+    if(d.country) L.push("Based in: "+d.country);
+    L.push("Contact: "+d.contact);
+    L.push("");
+    L.push("Area: "+areaLabels());
+    if(d.stage) L.push("Where we are: "+stageLabel());
+    if(d.timing) L.push("Timing: "+timingLabel());
+    L.push("");
+    L.push("What we are trying to achieve in Kenya:");
+    L.push(d.goal);
+    if(d.today){ L.push(""); L.push("How it works today:"); L.push(d.today); }
+    L.push("");
+    L.push("Starting with: "+packLabel(d.pack));
+    L.push("Fee seen and accepted: yes");
+    if(d.day) L.push("Meeting preferred: "+dayLabel(d.day)+(d.band?", "+bandLabel(d.band):""));
+    if(d.notes){ L.push(""); L.push("Anything else: "+d.notes); }
+    return L.join("\n");
+  }
+
+  function render(){
+    var h="";
+    if(step===1){
+      h+='<h2 class="q">First, who am I speaking to?</h2>'+
+         '<p class="hint">So the reply reaches the right person.</p>'+
+         (err?'<p class="err">'+esc(err)+'</p>':'')+
+         '<label class="f"><span>Your name</span><input type="text" id="f_name" value="'+esc(d.name)+'" placeholder="Jane Wanjiru"></label>'+
+         '<label class="f"><span>Company</span><input type="text" id="f_company" value="'+esc(d.company)+'" placeholder="Company name"></label>'+
+         '<label class="f"><span>Your role</span><input type="text" id="f_role" value="'+esc(d.role)+'" placeholder="Regional manager"></label>'+
+         '<label class="f"><span>Email or WhatsApp number</span><input type="text" id="f_contact" value="'+esc(d.contact)+'" placeholder="jane@company.com"></label>'+
+         '<label class="f"><span>Where you are based</span><input type="text" id="f_country" value="'+esc(d.country)+'" placeholder="Dubai, UAE"></label>';
+    }
+    else if(step===2){
+      h+='<h2 class="q">What kind of help do you need?</h2>'+
+         '<p class="hint">Pick everything that applies.</p>'+
+         (err?'<p class="err">'+esc(err)+'</p>':'')+
+         optList(AREAS, d.areas, true);
+    }
+    else if(step===3){
+      h+='<h2 class="q">What is the problem?</h2>'+
+         '<p class="hint">Plain words are fine. The second box matters most — it tells me where the time is going.</p>'+
+         (err?'<p class="err">'+esc(err)+'</p>':'')+
+         '<label class="f"><span>What are you trying to achieve in Kenya?</span><textarea id="f_goal" placeholder="We want to get our diagnostic kits into private clinics in Nairobi and Mombasa.">'+esc(d.goal)+'</textarea></label>'+
+         '<label class="f"><span>How does the process work today?</span><textarea id="f_today" placeholder="One distributor, orders by WhatsApp, we only see sales when they reorder.">'+esc(d.today)+'</textarea></label>';
+    }
+    else if(step===4){
+      h+='<h2 class="q">Where are you right now?</h2>'+
+         '<p class="hint">This decides how small the first test should be.</p>'+
+         (err?'<p class="err">'+esc(err)+'</p>':'')+
+         optList(STAGES, d.stage, false)+
+         '<h2 class="q" style="font-size:19px;margin:26px 0 12px">And when would you want to start?</h2>'+
+         '<div id="timing">'+optList(TIMING, d.timing, false)+'</div>';
+    }
+    else if(step===5){
+      h+='<h2 class="q">Which option do you want to start with?</h2>'+
+         '<p class="hint">Fixed fee. Half starts the work, half on delivery. Invoiced in shillings or dollars.</p>'+
+         (err?'<p class="err">'+esc(err)+'</p>':'')+
+         optList(PACKS, d.pack, false)+
+         '<button class="ack'+(d.ack?" on":"")+'" id="ackBtn"><span class="box"></span><p>I have seen the fee for this option and I am happy to go ahead on that basis.</p></button>';
+    }
+    else if(step===6){
+      var ds=days();
+      h+='<h2 class="q">When suits you?</h2>'+
+         '<p class="hint">Nairobi time (EAT, UTC+3). I confirm the exact time when I reply.</p>'+
+         (err?'<p class="err">'+esc(err)+'</p>':'')+
+         '<div class="days">'+ds.map(function(x){
+            return '<button class="day'+(d.day===x.key?" on":"")+'" data-day="'+x.key+'"><u>'+x.dow+'</u><b>'+x.dd+'</b><u>'+x.mon+'</u></button>';
+         }).join("")+'</div>'+
+         optList(BANDS.map(function(b){return [b[0],b[1],b[2]];}), d.band, false)+
+         '<label class="f" style="margin-top:18px"><span>Anything else I should know? (optional)</span><textarea id="f_notes" placeholder="We are at WHX stand B12 until Thursday.">'+esc(d.notes)+'</textarea></label>';
+    }
+    else {
+      h+='<div class="review">'+
+         '<h2 class="q">Here is your brief.</h2>'+
+         '<p class="hint">Check it, then send it. It arrives with me as one message — nothing to type twice.</p>'+
+         '<dl>'+
+           '<dt>You</dt><dd>'+esc(d.name+(d.role?", "+d.role:"")+(d.company?"\n"+d.company:"")+(d.country?"\n"+d.country:"")+"\n"+d.contact)+'</dd>'+
+           '<dt>Area</dt><dd>'+esc(areaLabels())+'</dd>'+
+           '<dt>The problem</dt><dd>'+esc(d.goal+(d.today?"\n\nToday: "+d.today:""))+'</dd>'+
+           '<dt>Where you are</dt><dd>'+esc(stageLabel()+(d.timing?" · "+timingLabel():""))+'</dd>'+
+           '<dt>Starting with</dt><dd>'+esc(packLabel(d.pack))+'</dd>'+
+           '<dt>Meeting</dt><dd>'+esc(d.day?dayLabel(d.day)+(d.band?", "+bandLabel(d.band):""):"No preference given")+'</dd>'+
+         '</dl>'+
+         '<div class="stack">'+
+           '<a class="btn accent" id="sendWa" href="#">Send it on WhatsApp</a>'+
+           '<button class="btn ghost" id="copyBrief">Copy the brief</button>'+
+         '</div>'+
+         '<p class="btn-note">WhatsApp opens with the brief already written. You only press send.</p>'+
+         '</div>';
+    }
+    stage.innerHTML = h;
+    err="";
+    lab.textContent = step<=TOTAL ? ("Step "+step+" of "+TOTAL) : "Review and send";
+    bar.style.width = Math.round(Math.min(step,TOTAL+1)/(TOTAL+1)*100)+"%";
+    nextBtn.textContent = step===TOTAL ? "Review" : (step>TOTAL ? "Done" : "Continue");
+    nextBtn.style.display = step>TOTAL ? "none" : "";
+    wire();
+    document.querySelector(".sheet-body").scrollTop = 0;
+  }
+
+  function wire(){
+    stage.querySelectorAll("input,textarea").forEach(function(el){
+      el.addEventListener("input", function(){
+        var m = {f_name:"name",f_company:"company",f_role:"role",f_contact:"contact",f_country:"country",f_goal:"goal",f_today:"today",f_notes:"notes"};
+        if(m[el.id]){ d[m[el.id]] = el.value; save(); }
+      });
+    });
+    stage.querySelectorAll("[data-pick]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var v = b.getAttribute("data-pick");
+        if(step===2){
+          var i=d.areas.indexOf(v);
+          if(i>-1) d.areas.splice(i,1); else d.areas.push(v);
+        } else if(step===4){
+          if(b.parentNode.id==="timing") d.timing=v; else d.stage=v;
+        } else if(step===5){ d.pack=v; }
+        else if(step===6){ d.band=v; }
+        save(); render();
+      });
+    });
+    stage.querySelectorAll("[data-day]").forEach(function(b){
+      b.addEventListener("click", function(){ d.day=b.getAttribute("data-day"); save(); render(); });
+    });
+    var ackBtn = document.getElementById("ackBtn");
+    if(ackBtn) ackBtn.addEventListener("click", function(){ d.ack=!d.ack; save(); render(); });
+
+    var wa = document.getElementById("sendWa");
+    if(wa) wa.href = "https://wa.me/"+WA+"?text="+encodeURIComponent(brief());
+
+    var cp = document.getElementById("copyBrief");
+    if(cp) cp.addEventListener("click", function(){
+      var t = brief();
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(t).then(function(){ toast("Brief copied"); },function(){ toast("Select the text to copy it"); });
+      } else { toast("Select the text to copy it"); }
+    });
+  }
+
+  function valid(){
+    if(step===1){
+      if(!d.name.trim() || !d.company.trim()){ err="Add your name and company so I know who is writing."; return false; }
+      if(!d.contact.trim()){ err="Add an email or WhatsApp number, otherwise I cannot reply."; return false; }
+    }
+    if(step===2 && d.areas.length===0){ err="Pick at least one area. Choose \u201cNot sure yet\u201d if that is the truth."; return false; }
+    if(step===3 && !d.goal.trim()){ err="Write one line on what you are trying to achieve."; return false; }
+    if(step===4 && !d.stage){ err="Pick where you are right now."; return false; }
+    if(step===5){
+      if(!d.pack){ err="Pick the option you want to start with."; return false; }
+      if(!d.ack){ err="Tick the box to confirm you have seen the fee."; return false; }
+    }
+    return true;
+  }
+
+  function open(){ sheet.classList.add("open"); document.body.style.overflow="hidden"; render(); }
+  function close(){ sheet.classList.remove("open"); document.body.style.overflow=""; }
+  function back(){
+    if(step>1){ step--; render(); }
+    else close();
+  }
+
+  document.getElementById("open1").addEventListener("click", open);
+  document.getElementById("open2").addEventListener("click", open);
+  document.getElementById("close").addEventListener("click", close);
+  document.getElementById("back").addEventListener("click", back);
+  backFoot.addEventListener("click", back);
+  nextBtn.addEventListener("click", function(){
+    if(!valid()){ render(); return; }
+    step++; render();
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key==="Escape" && sheet.classList.contains("open")) back();
+  });
+})();
+</script>
+</body>
+</html>
